@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 // carregar um objeto porém com menos dados por exemplo podendo deixar de expor uma senha o algo do tipo;
 public class UserDTO implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
 
