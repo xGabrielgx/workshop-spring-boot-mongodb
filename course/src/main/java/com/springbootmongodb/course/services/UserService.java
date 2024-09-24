@@ -1,6 +1,5 @@
 package com.springbootmongodb.course.services;
 
-
 import com.springbootmongodb.course.domain.User;
 import com.springbootmongodb.course.dto.UserDTO;
 import com.springbootmongodb.course.repository.UserRepository;
@@ -37,7 +36,18 @@ public class UserService {
         } else {
             throw new ObjectNotFoundException(id);
         }
+    }
 
+    public User update(User obj) {
+            User newObj = findById(obj.getId());
+            updateDate(newObj, obj);
+            return repository.save(newObj);
+
+    }
+
+    private void updateDate(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
     }
 
     public User fromDTO(UserDTO objDto) {
