@@ -2,6 +2,7 @@ package com.springbootmongodb.course.config;
 
 import com.springbootmongodb.course.domain.Post;
 import com.springbootmongodb.course.domain.User;
+import com.springbootmongodb.course.dto.AuthorDTO;
 import com.springbootmongodb.course.repository.PostRepository;
 import com.springbootmongodb.course.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,13 @@ public class Instantiantion implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, LocalDate.from(fmt.parse("20/03/2018")), "Partiu viagem", "Vou viajar para SP. Abraços!", maria);
-        Post post2 = new Post(null, LocalDate.from(fmt.parse("22/03/2018")), "Bom Dia", "Acordei Feliz hoje", maria);
-
+        // primeiro salva os usuários antes associar
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+                                                                    // new AuthorDTO(maria aqui fazer a persistencia do objto
+        Post post1 = new Post(null, LocalDate.from(fmt.parse("20/03/2018")), "Partiu viagem", "Vou viajar para SP. Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null, LocalDate.from(fmt.parse("22/03/2018")), "Bom Dia", "Acordei Feliz hoje", new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
