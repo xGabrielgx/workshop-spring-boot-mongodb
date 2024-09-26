@@ -3,6 +3,7 @@ package com.springbootmongodb.course.resources;
 import com.springbootmongodb.course.domain.Post;
 import com.springbootmongodb.course.domain.User;
 import com.springbootmongodb.course.dto.UserDTO;
+import com.springbootmongodb.course.resources.util.URL;
 import com.springbootmongodb.course.services.PostService;
 import com.springbootmongodb.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,13 @@ public class PostResource {
     public ResponseEntity<Post> findById(@PathVariable String id) {
         Post obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping(value = "/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text) {
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+
     }
 }
