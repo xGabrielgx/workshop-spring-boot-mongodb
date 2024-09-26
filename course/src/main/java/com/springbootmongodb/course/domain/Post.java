@@ -2,12 +2,15 @@ package com.springbootmongodb.course.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.springbootmongodb.course.dto.AuthorDTO;
+import com.springbootmongodb.course.dto.CommentDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -23,6 +26,8 @@ public class Post implements Serializable {
     private String body;
 
     private AuthorDTO author;
+
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post(){
     }
@@ -75,6 +80,10 @@ public class Post implements Serializable {
         this.author = author;
     }
 
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,4 +96,6 @@ public class Post implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+
 }
