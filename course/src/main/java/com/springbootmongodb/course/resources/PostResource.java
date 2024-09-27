@@ -53,7 +53,7 @@ public class PostResource {
             @RequestParam(value="minDate", defaultValue = "") String minDate,
             @RequestParam(value="maxDate", defaultValue = "") String maxDate) {
         text = URL.decodeParam(text);
-        LocalDateTime min= URL.convertDate(minDate, LocalDateTime.of(2018, 3, 22, 14, 0 , 0));
+        LocalDateTime min= URL.convertDate(minDate, LocalDateTime.of(2018, 3, 19, 0, 0 , 0));
         LocalDateTime max= URL.convertDate(minDate, LocalDateTime.now());
         List<Post> list = service.fullSearch(text, min, max);
         return ResponseEntity.ok().body(list);
