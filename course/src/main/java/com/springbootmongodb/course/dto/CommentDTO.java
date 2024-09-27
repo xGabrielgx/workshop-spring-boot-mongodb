@@ -5,20 +5,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CommentDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     private String text;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone = "GMT")
-    private LocalDate date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    private LocalDateTime date;
     private AuthorDTO author;
 
     public CommentDTO(){
     }
 
-    public CommentDTO(String text, LocalDate date, AuthorDTO author) {
+    public CommentDTO(String text, LocalDateTime date, AuthorDTO author) {
         this.text = text;
         this.date = date;
         this.author = author;
@@ -32,11 +33,11 @@ public class CommentDTO implements Serializable {
         this.text = text;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

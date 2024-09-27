@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,8 +21,9 @@ public class Post implements Serializable {
 
     @Id
     private String id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone = "GMT")
-    private LocalDate date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    private LocalDateTime date;
     private String title;
     private String body;
 
@@ -32,7 +34,7 @@ public class Post implements Serializable {
     public Post(){
     }
 
-    public Post(String id, LocalDate date, String title, String body, AuthorDTO author) {
+    public Post(String id, LocalDateTime date, String title, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -48,11 +50,11 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

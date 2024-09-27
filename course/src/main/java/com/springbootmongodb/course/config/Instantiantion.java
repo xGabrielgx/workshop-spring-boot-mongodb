@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +30,7 @@ public class Instantiantion implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").withZone(ZoneId.of("GMT"));
 
         userRepository.deleteAll();
         postRepository.deleteAll();
@@ -41,12 +43,12 @@ public class Instantiantion implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
                                                                     // new AuthorDTO(maria aqui fazer a persistencia do objto
-        Post post1 = new Post(null, LocalDate.from(fmt.parse("20/03/2018")), "Partiu viagem", "Vou viajar para SP. Abraços!", new AuthorDTO(maria));
-        Post post2 = new Post(null, LocalDate.from(fmt.parse("22/03/2018")), "Bom Dia", "Acordei Feliz hoje", new AuthorDTO(maria));
+        Post post1 = new Post(null, LocalDateTime.from(fmt.parse("21/03/2018 00:00:00")), "Partiu viagem", "Vou viajar para SP. Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null, LocalDateTime.from(fmt.parse("23/03/2018 00:00:00")), "Bom Dia", "Acordei Feliz hoje", new AuthorDTO(maria));
 
-        CommentDTO c1 = new CommentDTO("Boa viagem mano!", LocalDate.from(fmt.parse("21/03/2018")), new AuthorDTO(alex));
-        CommentDTO c2 = new CommentDTO("Aproveite", LocalDate.from(fmt.parse("22/03/2018")), new AuthorDTO(bob));
-        CommentDTO c3 = new CommentDTO("Tenha um ótido dia!", LocalDate.from(fmt.parse("23/03/2018")), new AuthorDTO(alex));
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", LocalDateTime.from(fmt.parse("21/03/2018 00:00:00")), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite", LocalDateTime.from(fmt.parse("22/03/2018 00:00:00")), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótido dia!", LocalDateTime.from(fmt.parse("23/03/2018 00:00:00")), new AuthorDTO(alex));
 
         post1.getComments().addAll(Arrays.asList(c1, c2));
         post2.getComments().addAll(Arrays.asList(c3));
